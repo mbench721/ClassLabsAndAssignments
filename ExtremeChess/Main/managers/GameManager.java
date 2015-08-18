@@ -1,19 +1,20 @@
 package managers;
 
 public class GameManager {
-	private PlayerManager pieces;
+	
+	
 	private BoardManager boardMan;
+	private String[] moves;
+	
 	public GameManager(String[] file){
-		createPieceManager();
+		
+		moves = file;
 		createBoardManager();
-		
-		
+			
 	}
-	private void createPieceManager(){
-		pieces = new PlayerManager();
-	}
+	
 	private void createBoardManager(){
-		boardMan = new BoardManager();
+		boardMan = new BoardManager(moves);
 	}
 
 }
