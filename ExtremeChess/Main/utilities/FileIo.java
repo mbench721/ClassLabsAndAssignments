@@ -10,7 +10,7 @@ public class FileIo {
 	public FileIo(String[] fileNames){
 		
 		this.fileNames = fileNames;
-		movesFile = new File(fileNames[0]);
+		movesFile = new File(fileNames[1]);
 			
 	}
 	
