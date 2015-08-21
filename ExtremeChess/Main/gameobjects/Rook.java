@@ -11,17 +11,20 @@ public class Rook extends Piece {
 		
 		control = new PieceController(this);
 	}
+
 	@Override
-	  public boolean isValidMove(int toX, int toY){
-	        if(toX == 0 && toY == 0){
-	            return false; 
-	        }//cannot move nothing
-	        else if( toX > 1   &&  toY> 1 ){
-	            return false;
-	        }
-	        else{
-	        	 return true;	
-	        }
+	public boolean isValidMove(int toX, int toY,boolean cap) {
+		if(toX <= 7&& toX >= -7 && toY == 0){
+			return true;
+		}
+		else if(toY <= 7 && toY >= -7 && toX == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
 	}
+	
 
 }

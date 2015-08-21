@@ -53,7 +53,9 @@ public abstract class Piece {
     	this.y = y;
     }
 
-   public abstract boolean isValidMove(int toX, int toY);
+    public abstract boolean isValidMove(int toX,int toY,boolean cap);
+    	
+    	
 	   
    
 }

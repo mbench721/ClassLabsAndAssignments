@@ -16,7 +16,7 @@ public class BoardTile {
 		this.yPos = y;
 		this.pieceType = "-";
 		this.pieceColor = "none";
-		this.piece = new Blank(true, x,y,"none", "-");
+		
 
 	}
 
@@ -39,7 +39,7 @@ public class BoardTile {
 		this.isOccupied = false;
 		pieceType = "-";
 		pieceColor = "none";
-		piece = new Blank(true,xPos,yPos,"none","-");
+		piece = null;
 	}
 
 	public Piece getPiece() {

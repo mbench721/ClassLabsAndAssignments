@@ -1,20 +1,32 @@
 package utilities;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class FileIo {
 	
 	private File movesFile;
-	private String[] fileNames;
+	private ArrayList<String> fileNames;
+	private ArrayList<File> files = new ArrayList();
 
-	public FileIo(String[] fileNames){
+	public FileIo(ArrayList<String> fileNames){
 		
 		this.fileNames = fileNames;
-		movesFile = new File(fileNames[1]);
+		for (String name : fileNames){
+			
+		}
+		
+		if(fileNames.size() >= 2){
+			movesFile = new File(fileNames.get(fileNames.size() - 1));
+		}if(fileNames.size() == 1 && !fileNames.get(0).equalsIgnoreCase("v")){
+			movesFile = new File(fileNames.get(fileNames.size() -1 ));
+		}
+		
+	
 			
 	}
 	
-	public String[] getFileNames() {
+	public ArrayList<String> getFileNames() {
 		return fileNames;
 	}
 	

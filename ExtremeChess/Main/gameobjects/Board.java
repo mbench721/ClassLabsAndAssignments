@@ -11,10 +11,11 @@ public class Board {
 
 
 
-	public Board(String[] file){
+	public Board(){
 		
 		setSquares(tiles);
-		moves = file;
+		
+		
 		control = new BoardController(this);
 
 		
@@ -28,9 +29,9 @@ public class Board {
 		for(int i = 0; i < tiles.length; ++i){
 			
 			for(int j = 0; j < tiles.length; ++j){
-
+				
 				tiles[i][j] = new BoardTile(i,j);
-
+				
 			}
 		}
 
@@ -38,14 +39,14 @@ public class Board {
 	}
 
 	public void generateBoard(){
-		int i = 8;
+		int i = 1;
 		System.out.print("   A  " + " B  " + " C  " + " D  " + " E  " + " F  " + " G  " + " H");
 		for (int row = 0; row < boardSize; row++)
 		{
 			System.out.println("");
 			System.out.println(" ---------------------------------");
 			System.out.print(i);
-			--i;
+			++i;
 			for (int column = 0; column < boardSize; column++)
 			{
 				System.out.print("| " +tiles[row][column].pieceType + " ");
@@ -58,14 +59,14 @@ public class Board {
 	} 
 	public void updateBoard(BoardTile[][] u){
 		tiles = u;
-		int i = 8;
+		int i = 1;
 		System.out.print("   A  " + " B  " + " C  " + " D  " + " E  " + " F  " + " G  " + " H");
 		for (int row = 0; row < boardSize; row++)
 		{
 			System.out.println("");
 			System.out.println(" ---------------------------------");
 			System.out.print(i);
-			--i;
+			++i;
 			for (int column = 0; column < boardSize; column++)
 			{
 				System.out.print("| " +tiles[row][column].pieceType + " ");
@@ -76,6 +77,11 @@ public class Board {
 		System.out.println("");
 		System.out.println(" ---------------------------------");
 	} 
+	
+	
+	public void nonVerboseUpdate(BoardTile[][] v){
+		tiles = v;
+	}
 
 
 

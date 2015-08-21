@@ -12,17 +12,24 @@ public class Queen extends Piece {
 		control = new PieceController(this);
 		
 	}
-	@Override
-	  public boolean isValidMove(int toX, int toY){
-	        if(toX == 0 && toY == 0){
-	            return false; 
-	        }//cannot move nothing
-	        else if( toX > 1   &&  toY> 1 ){
-	            return false;
-	        }
-	        else{
-	        	 return true;	
-	        }
-	}
 
-}
+	@Override
+	public boolean isValidMove(int toX, int toY,boolean cap) {
+		
+		if (Math.abs(toX) == Math.abs(toY)){
+			return true;
+		}
+		else if ( Math.abs(toX) == Math.abs(toY)){
+			return true;
+		}
+		else if(toX == 0 || toY == 0){
+			return true;
+		}
+			return false;
+		}
+		
+	}
+	
+	
+
+

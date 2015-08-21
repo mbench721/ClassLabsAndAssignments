@@ -16,19 +16,25 @@ public class King extends Piece {
 	}
 	
 	@Override
-	  public boolean isValidMove(int toX, int toY){
-//	        if(toX == 0 && toY == 0){
-//	            return false; 
-//	        }//cannot move nothing
-	         if( toX > 1   &&  toY> 1 ){
-	            return false;
-	        }
-	        else{
-	        	 return true;	
-	        }
-	        
+	public boolean isValidMove(int toX,int toY,boolean cap){
+		if(toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
+			return true;	
+		}
+		else if(toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
+			return true;
+		}
+		else if(Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
+			return true;
+					
+		}
+		
+		else{
+			return false;
+		}
+		
+	}
 	       
-	    }
+	    
 
 	
 }

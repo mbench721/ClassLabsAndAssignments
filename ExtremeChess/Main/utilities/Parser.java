@@ -4,18 +4,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Parser {
 	
 	File needsParse;
 	String[] move =  new String[6];
+	ArrayList<String> moves = new ArrayList<String>();
 
 	public Parser(File f){
 		
 		this.needsParse = f;
+		
 	}
 
-	public String[] readFile(){
+	public ArrayList<String> readFile(){
+		
 		FileReader freader= null;
 
 		try {
@@ -26,7 +30,9 @@ public class Parser {
 			String line;
 			int i = 0;
 			while((line = inputFile.readLine()) != null){
-				move[i] = line;
+				
+				moves.add(line);
+				
 				i++;
 			}
 
@@ -45,6 +51,6 @@ public class Parser {
 				}
 			}
 		}
-		return move;
+		return moves;
 	}
 }

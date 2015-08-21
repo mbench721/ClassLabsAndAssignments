@@ -1,7 +1,9 @@
 package managers;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import sun.security.util.Length;
 import utilities.FileIo;
 import utilities.Parser;
 import controllers.BoardController;
@@ -16,27 +18,29 @@ public class BoardManager {
 	private FileIo fileCreate;
 	private Parser parse;
 	Board board;
-	String[] moves;
-	private String[] movesList = new String [20];
+	ArrayList<String> moves = new ArrayList<String>();;
 	BoardController boardControl;
 	MoveController moveControl;
 	private boolean mover;
 	private boolean place;
+	private boolean verbose;
 	private boolean run;
 
 	public BoardManager(String[] file){
-
-		moves = file;
+		
+		for(String conv : file){
+			moves.add(conv);
+		}
+		
 		createBoard();
 		createBoardControl();
 		createMoveControl();
 		run();
 
-		
-
 	}
 	private void createBoard(){
-		board = new Board(moves);
+		board = new Board();
+		
 	}
 	private void createBoardControl(){
 
@@ -47,27 +51,64 @@ public class BoardManager {
 		moveControl = new MoveController(board);
 	}
 	private void run(){
+		
 		boardControl.placePieces();
-		if(moves.length > 0 && moves[0].equalsIgnoreCase("v")){
+		
+		if(moves.size() >= 1 && moves.get(0).equalsIgnoreCase("v")){
+			
+			verbose = true;	
+		}
+		else {
+			
+			verbose = false;
+		}
+		
+		if(verbose && moves.get(0).equalsIgnoreCase("v") && moves.size() >=2){
 			createMovesList();
-			moveControl.pieceMoveFile(movesList);
+			
+				moveControl.pieceMoveFile(moves, verbose);
+			
+		}
+		else if(verbose && moves.get(0).equalsIgnoreCase("v") && moves.size() ==1){
+				System.out.println("verb withou");
+				Scanner stan = new Scanner(System.in);
+				String input;
+				
+				input = stan.nextLine();
+				moveControl.moveControl(input,verbose);
+					
+				while(!input.isEmpty()){
+					input = stan.nextLine();
+					moveControl.moveControl(input,verbose);
+				}
+					
+		}
+		else if(!verbose && moves.size() == 1 && !moves.get(0).equalsIgnoreCase("v")){
+			
+			createMovesList();
+			moveControl.pieceMoveFile(moves,verbose);
+			board.generateBoard();
+					
 		}
 		else{
-		Scanner stan = new Scanner(System.in);
-		String input;
-		run = true;
-		while(run){
 			
-		input = stan.nextLine();
-		
-				moveControl.moveControl(input);
-			
+			Scanner stan = new Scanner(System.in);
+			String input;
+			run = true;	
+			input = stan.nextLine();
+			moveControl.moveControl(input,verbose);
+				
+			while(!input.isEmpty()){
+				input = stan.nextLine();
+				moveControl.moveControl(input,verbose);
+			}
+			board.generateBoard();
 		}
-
+		
 		System.out.println("finish");
 		}
-
-	}
+		
+	
 	public void placeOrMove(String move){
 
 		for(int i = 0; i < letts.length; ++ i){
@@ -91,7 +132,7 @@ public class BoardManager {
 	public void createMovesList(){
 		fileCreate = new FileIo(moves);
 		parse = new Parser(fileCreate.getMovesFile());
-		movesList = parse.readFile();
+		moves = parse.readFile();
 	}
 }
 
