@@ -14,7 +14,25 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean isValidMove(int toX, int toY,boolean cap) {
+	public boolean isValidLmove(int toX, int toY,boolean cap) {
+		if(toX == 2 && toY <=1 && toY >= -1  && toY != 0){
+			return true;
+		}
+		else if(toX == -2 && toY <=1 && toY >= -1 && toY != 0){
+			return true;
+		}
+		else if(toY == 2 &&  toX <=1 && toX >= -1 && toX != 0){
+			return true;
+		}
+
+		else if(toY == -2 && toX <=1 && toX >= -1 && toX != 0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isValidDmove(int toX, int toY, boolean cap) {
 		if(toX == 2 && toY <=1 && toY >= -1  && toY != 0){
 			return true;
 		}

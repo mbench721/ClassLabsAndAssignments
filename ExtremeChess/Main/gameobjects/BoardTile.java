@@ -7,7 +7,7 @@ public class BoardTile {
 	public String pieceType;
 	public String pieceColor;
 	private Piece piece;
-	private boolean isOccupied;
+	public boolean isOccupied;
 
 	public BoardTile(int x,int y){
 		
@@ -52,5 +52,33 @@ public class BoardTile {
 	public boolean isOccupied() {
 		return isOccupied;
 	}
+	public void detCheck(BoardTile[][] c){
+		System.out.println("made it");
+		for(int i = 0; i < c.length; ++i){
+
+			for(int j = 0; j < c.length; ++j){
+				
+				if(c[i][j].isOccupied() && c[i][j].pieceType.equalsIgnoreCase("r") && c[i][j].xPos - this.xPos == 0){
+					System.out.println("check");
+				}
+				else if(c[i][j].isOccupied() && c[i][j].pieceType.equalsIgnoreCase("r") && !c[i][j].pieceColor.equalsIgnoreCase(pieceColor)&& c[i][j].yPos - this.yPos == 0){
+					System.out.println("check");
+				}
+				
+
+			}
+		}
+
+		
+		
+	}
+		
+	
+		
+
 
 }
+	
+
+
+

@@ -4,8 +4,8 @@ import controllers.PieceController;
 
 public class Pawn extends Piece{
 	private PieceController control;
-	private int validMovedDist = 2;
-	private int firstMove = 1;
+	private int validMovePos = 2;
+	private int validMoveNeg = -2;
 
 
 
@@ -19,21 +19,23 @@ public class Pawn extends Piece{
 
 
 	@Override
-	public boolean isValidMove(int toX, int toY,boolean cap) {
-		System.out.println(toX);
-		System.out.println(toY);
-		
-		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= 1 && toY >= 0){
+	public boolean isValidLmove(int toX, int toY,boolean cap) {
+
+		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
+			validMovePos = 1;
 			return true;
 		}
-		else if(!cap && this.getColor().equalsIgnoreCase("l") && toY >= -1 && toY <= 0){
+		else if(!cap && this.getColor().equalsIgnoreCase("l") && toY >= validMoveNeg && toY <= 0){
+			validMoveNeg = -1;
 			return true;
 		}
-		else if(cap && this.getColor().equalsIgnoreCase("d") && toY == 1 && toY >= 0 && toX != 0 ){
-			
+		else if(cap && this.getColor().equalsIgnoreCase("d") && toY == validMovePos && toY >= 0 && toX != 0 ){
+			validMovePos = 1;
+
 			return true;
 		}
-		else if(cap && this.getColor().equalsIgnoreCase("l") && toY == -1 && toY <= 0 && toX !=0){
+		else if(cap && this.getColor().equalsIgnoreCase("l") && toY == validMoveNeg && toY <= 0 && toX !=0){
+			validMoveNeg = -1;
 			return true;
 		}
 		else{
@@ -41,7 +43,29 @@ public class Pawn extends Piece{
 		}
 
 	}
+	@Override
+	public boolean isValidDmove(int toX, int toY, boolean cap) {
+		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
+			validMovePos = 1;
+			return true;
+		}
+		else if(!cap && this.getColor().equalsIgnoreCase("l") && toY >= validMoveNeg && toY <= 0){
+			validMoveNeg = -1;
+			return true;
+		}
+		else if(cap && this.getColor().equalsIgnoreCase("d") && toY == validMovePos && toY >= 0 && toX != 0 ){
+			validMovePos = 1;
 
+			return true;
+		}
+		else if(cap && this.getColor().equalsIgnoreCase("l") && toY == validMoveNeg && toY <= 0 && toX !=0){
+			validMoveNeg = -1;
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 }
 
 

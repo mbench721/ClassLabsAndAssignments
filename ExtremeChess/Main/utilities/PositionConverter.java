@@ -1,8 +1,48 @@
 package utilities;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import gameobjects.BoardTile;
+import gameobjects.Piece;
+
 public class PositionConverter {
 	private int convertedY;
 	private int convertedX;
+	private Piece selected;
+	
+	Pattern single = Pattern.compile("([a-h])([1-8])([a-h])([1-8])");
+	Pattern twoMove = Pattern.compile("([a-h])([1-8])([a-h])([1-8])([a-h])([1-8])([a-h])([1-8])");
+	Pattern capture = Pattern.compile("([a-h])([1-8])([a-h])([1-8])([*])");
+	
+	
+	
+	public boolean matchPattern(String move){
+		
+		Matcher singleMatch = single.matcher(move.toLowerCase());
+		Matcher doubleMatch = twoMove.matcher(move.toLowerCase());
+		Matcher singleCap = capture.matcher(move.toLowerCase());
+		
+		if(singleMatch.find()){
+			return true;
+		}
+		else if(doubleMatch.find()){
+			return true;
+		}
+		else if(singleCap.find()){
+			return true;
+		}
+		else{
+			return false;	
+		}
+	
+		
+	}
+	
+	public Piece getTilePiece(BoardTile[][] t,String x, String y){
+		selected = t[convertY(y)][convertX(x)].getPiece();
+		return selected;
+	}
 
 	public int convertX(String x){
 		convertedX = 0;

@@ -12,13 +12,13 @@ public class Board {
 
 
 	public Board(){
-		
+
 		setSquares(tiles);
-		
-		
+
+
 		control = new BoardController(this);
 
-		
+
 	}
 	public BoardTile[][] getTiles() {
 		return tiles;
@@ -27,11 +27,11 @@ public class Board {
 	public BoardTile[][] setSquares(BoardTile[][] u) {
 
 		for(int i = 0; i < tiles.length; ++i){
-			
+
 			for(int j = 0; j < tiles.length; ++j){
-				
+
 				tiles[i][j] = new BoardTile(i,j);
-				
+
 			}
 		}
 
@@ -77,10 +77,27 @@ public class Board {
 		System.out.println("");
 		System.out.println(" ---------------------------------");
 	} 
-	
-	
+
+
 	public void nonVerboseUpdate(BoardTile[][] v){
 		tiles = v;
+	}
+
+	public void check(String c){
+		System.out.println("made it");
+		for(int i = 0; i < tiles.length; ++i){
+
+			for(int j = 0; j < tiles.length; ++j){
+				if(tiles[i][j].isOccupied()){
+				
+				if(tiles[i][j].pieceType.equalsIgnoreCase("k") && !tiles[i][j].pieceColor.equalsIgnoreCase(c)){
+					tiles[i][j].detCheck(tiles);
+				}
+
+				}
+			}
+		}
+
 	}
 
 

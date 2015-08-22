@@ -13,7 +13,21 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public boolean isValidMove(int toX, int toY,boolean cap) {
+	public boolean isValidLmove(int toX, int toY,boolean cap) {
+		if(toX <= 7&& toX >= -7 && toY == 0){
+			return true;
+		}
+		else if(toY <= 7 && toY >= -7 && toX == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+
+	@Override
+	public boolean isValidDmove(int toX, int toY, boolean cap) {
 		if(toX <= 7&& toX >= -7 && toY == 0){
 			return true;
 		}
