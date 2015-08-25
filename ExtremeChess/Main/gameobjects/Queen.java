@@ -7,6 +7,7 @@ public class Queen extends Piece {
 	private PieceController control;
 
 	public Queen(boolean available, int x, int y, String c,String t) {
+		
 		super(available, x, y, c,t);
 
 		control = new PieceController(this);
