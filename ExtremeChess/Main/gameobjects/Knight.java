@@ -15,17 +15,17 @@ public class Knight extends Piece {
 
 	@Override
 	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
-		if(toX == 2 && toY <=1 && toY >= -1  && toY != 0){
+		if(!lCheck && toX == 2 && toY <=1 && toY >= -1  && toY != 0){
 			return true;
 		}
-		else if(toX == -2 && toY <=1 && toY >= -1 && toY != 0){
+		else if(!lCheck && toX == -2 && toY <=1 && toY >= -1 && toY != 0){
 			return true;
 		}
-		else if(toY == 2 &&  toX <=1 && toX >= -1 && toX != 0){
+		else if(!lCheck && toY == 2 &&  toX <=1 && toX >= -1 && toX != 0){
 			return true;
 		}
 
-		else if(toY == -2 && toX <=1 && toX >= -1 && toX != 0){
+		else if(!lCheck && toY == -2 && toX <=1 && toX >= -1 && toX != 0){
 			return true;
 		}
 		return false;
@@ -33,19 +33,25 @@ public class Knight extends Piece {
 
 	@Override
 	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
-		if(toX == 2 && toY <=1 && toY >= -1  && toY != 0){
+		if(!dCheck && toX == 2 && toY <=1 && toY >= -1  && toY != 0){
 			return true;
 		}
-		else if(toX == -2 && toY <=1 && toY >= -1 && toY != 0){
+		else if(!dCheck && toX == -2 && toY <=1 && toY >= -1 && toY != 0){
 			return true;
 		}
-		else if(toY == 2 &&  toX <=1 && toX >= -1 && toX != 0){
+		else if(!dCheck && toY == 2 &&  toX <=1 && toX >= -1 && toX != 0){
 			return true;
 		}
 
-		else if(toY == -2 && toX <=1 && toX >= -1 && toX != 0){
+		else if(!dCheck && toY == -2 && toX <=1 && toX >= -1 && toX != 0){
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean isValidCastle() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

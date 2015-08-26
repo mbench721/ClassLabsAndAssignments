@@ -23,7 +23,7 @@ public class Queen extends Piece {
 		else if ( !lCheck && Math.abs(toX) == Math.abs(toY)){
 			return true;
 		}
-		else if(!lCheck && toX == 0 || toY == 0){
+		else if(!lCheck && toX == 0 || !lCheck && toY == 0){
 			return true;
 		}
 		return false;
@@ -37,11 +37,17 @@ public class Queen extends Piece {
 		else if (!dCheck && Math.abs(toX) == Math.abs(toY)){
 			return true;
 		}
-		else if(!dCheck && toX == 0 || toY == 0){
+		else if(!dCheck && toX == 0 || !dCheck &&  toY == 0){
 			return true;
 		}
 		return false;
 
+	}
+
+	@Override
+	public boolean isValidCastle() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

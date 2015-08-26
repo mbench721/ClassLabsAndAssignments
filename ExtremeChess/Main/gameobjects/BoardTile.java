@@ -9,6 +9,8 @@ public class BoardTile {
 	public int yPos;
 	public String pieceType;
 	public String pieceColor;
+	public String tempPieceType;
+	public String tempPieceColor;
 	private Piece piece;
 	public boolean isOccupied;
 	public boolean lightInCheck;
@@ -31,6 +33,17 @@ public class BoardTile {
 
 	public void printPiece(){
 		System.out.println(piece.getType());
+	}
+	public void swapPiece(BoardTile s){
+		
+		this.tempPieceType = pieceType;
+		this.pieceType = s.pieceType;
+		s.pieceType = this.tempPieceType;
+		
+		
+		
+		
+		
 	}
 
 	public void setPieceOn(Piece p){

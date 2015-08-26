@@ -66,6 +66,14 @@ public class Pawn extends Piece{
 			return false;
 		}
 	}
+
+
+
+	@Override
+	public boolean isValidCastle() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 
 
