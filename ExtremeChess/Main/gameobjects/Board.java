@@ -1,6 +1,7 @@
 package gameobjects;
 
 import controllers.BoardController;
+import controllers.MoveController;
 
 public class Board {
 
@@ -9,15 +10,10 @@ public class Board {
 	private int boardSize = 8;
 	private BoardTile[][] tiles = new BoardTile[8][8];
 
-
-
 	public Board(){
 
 		setSquares(tiles);
-
-
 		control = new BoardController(this);
-
 
 	}
 	public BoardTile[][] getTiles() {
@@ -83,16 +79,16 @@ public class Board {
 		tiles = v;
 	}
 
-	public void check(String c){
-		System.out.println("made it");
+	public void check(String c,boolean cap,MoveController co){
 		for(int i = 0; i < tiles.length; ++i){
 
 			for(int j = 0; j < tiles.length; ++j){
 				if(tiles[i][j].isOccupied()){
-				
-				if(tiles[i][j].pieceType.equalsIgnoreCase("k") && !tiles[i][j].pieceColor.equalsIgnoreCase(c)){
-					tiles[i][j].detCheck(tiles);
-				}
+
+					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].pieceColor.equalsIgnoreCase(c)){
+						tiles[i][j].detCheck(tiles,cap,co);
+						
+					}
 
 				}
 			}

@@ -13,7 +13,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean isValidLmove(int toX, int toY,boolean cap) {
+	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
 		
 		if(Math.abs(toX )== Math.abs(toY)){
 			return true;
@@ -25,7 +25,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean isValidDmove(int toX, int toY, boolean cap) {
+	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
 		if(Math.abs(toX )== Math.abs(toY)){
 			return true;
 		}

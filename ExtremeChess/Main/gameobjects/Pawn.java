@@ -19,7 +19,7 @@ public class Pawn extends Piece{
 
 
 	@Override
-	public boolean isValidLmove(int toX, int toY,boolean cap) {
+	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
 
 		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
 			validMovePos = 1;
@@ -44,7 +44,7 @@ public class Pawn extends Piece{
 
 	}
 	@Override
-	public boolean isValidDmove(int toX, int toY, boolean cap) {
+	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
 		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
 			validMovePos = 1;
 			return true;

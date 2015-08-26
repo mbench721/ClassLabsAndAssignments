@@ -14,7 +14,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean isValidLmove(int toX, int toY,boolean cap) {
+	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
 		if(toX == 2 && toY <=1 && toY >= -1  && toY != 0){
 			return true;
 		}
@@ -32,7 +32,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean isValidDmove(int toX, int toY, boolean cap) {
+	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
 		if(toX == 2 && toY <=1 && toY >= -1  && toY != 0){
 			return true;
 		}

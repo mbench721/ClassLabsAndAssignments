@@ -53,10 +53,10 @@ public abstract class Piece {
     	this.y = y;
     }
 
-    public abstract boolean isValidLmove(int toX,int toY,boolean cap);
-    public abstract boolean isValidDmove(int toX,int toY,boolean cap);
+    public abstract boolean isValidLmove(int toX,int toY,boolean cap,boolean lCheck);
+    public abstract boolean isValidDmove(int toX,int toY,boolean cap,boolean dCheck);
     	
-    	
+   
 	   
    
 }

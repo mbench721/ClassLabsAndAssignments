@@ -14,29 +14,29 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public boolean isValidLmove(int toX, int toY,boolean cap) {
+	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
 
-		if (Math.abs(toX) == Math.abs(toY)){
+		if (!lCheck && Math.abs(toX) == Math.abs(toY)){
 			return true;
 		}
-		else if ( Math.abs(toX) == Math.abs(toY)){
+		else if ( !lCheck && Math.abs(toX) == Math.abs(toY)){
 			return true;
 		}
-		else if(toX == 0 || toY == 0){
+		else if(!lCheck && toX == 0 || toY == 0){
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean isValidDmove(int toX, int toY, boolean cap) {
-		if (Math.abs(toX) == Math.abs(toY)){
+	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
+		if (!dCheck && Math.abs(toX) == Math.abs(toY)){
 			return true;
 		}
-		else if ( Math.abs(toX) == Math.abs(toY)){
+		else if (!dCheck && Math.abs(toX) == Math.abs(toY)){
 			return true;
 		}
-		else if(toX == 0 || toY == 0){
+		else if(!dCheck && toX == 0 || toY == 0){
 			return true;
 		}
 		return false;
