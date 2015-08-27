@@ -61,19 +61,38 @@ public class King extends Piece {
 	}
 
 
+	
+
 	@Override
-	public boolean isValidCastle() {
-		if(this.getX() == 4 && this.getY() == 0 && castleValid == 1 ){
+	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
+		System.out.println(this.getX() + " " + this.getY());
+		if(!lCheck && this.getX() == 4 && this.getY() == 0 && castleValid == 1 ){
 			return true;
 			
 		}
-		else if(this.getX() == 3 && this.getY() == 7 && castleValid == 1 ){
+		else if(!lCheck && this.getX() == 3 && this.getY() == 7 && castleValid == 1 ){
+			return true;
+			
+		}
+		else{
+			return false;
+		}
+		
+		
+	}
+
+	@Override
+	public boolean isValidDCastle(int toX, int toY, boolean dCheck) {
+		System.out.println(this.getX() + " " + this.getY());
+		if(!dCheck && this.getX() == 4 && this.getY() == 0 && castleValid == 1 ){
+			return true;
+			
+		}
+		else if(!dCheck && this.getX() == 3 && this.getY() == 7 && castleValid == 1 ){
+			return true;
 			
 		}
 		return false;
-	}
-	       
-	    
-
-	
+		
+	}   	
 }

@@ -45,15 +45,33 @@ public class Rook extends Piece {
 		
 	}
 
+
+
 	@Override
-	public boolean isValidCastle() {
-		
-		if(this.getX() == 0 && this.getY() == 0 && castleValid == 1 || this.getX() == 7 && this.getY() == 0 && castleValid == 1){
+	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
+		System.out.println(this.getX() + " " + this.getY());
+		System.out.println(castleValid);
+		if(!lCheck && this.getX() == 0 && this.getY() == 0 && castleValid == 1 || this.getX() == 7 && this.getY() == 0 && castleValid == 1){
 			return true;
 			
 		}
-		else if(this.getX() == 0 && this.getY() == 7 && castleValid == 1 || this.getX() == 7 && this.getY() == 7 && castleValid == 1 ){
+		else if(!lCheck && this.getX() == 0 && this.getY() == 7 && castleValid == 1 || this.getX() == 7 && this.getY() == 7 && castleValid == 1 ){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+
+	@Override
+	public boolean isValidDCastle(int toX, int toY, boolean dCheck) {
+		if(!dCheck && this.getX() == 0 && this.getY() == 0 && castleValid == 1 || this.getX() == 7 && this.getY() == 0 && castleValid == 1){
+			return true;
 			
+		}
+		else if(!dCheck && this.getX() == 0 && this.getY() == 7 && castleValid == 1 || this.getX() == 7 && this.getY() == 7 && castleValid == 1 ){
+			return true;
 		}
 		return false;
 	}

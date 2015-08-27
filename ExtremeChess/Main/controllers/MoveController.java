@@ -110,52 +110,51 @@ public class MoveController {
 				int toY2 = convert.convertY(doubleMatch.group(6))  - convert.convertY(doubleMatch.group(8));
 
 
-				
-					if(lTurn && tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece().isValidCastle() && 
-							lTurn && tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece().isValidCastle()){
-						
-						tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].swapPiece(tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))]);
-//						tiles[convert.convertY(doubleMatch.group(4))][convert.convertX(doubleMatch.group(3))].setPieceOn
-//						(tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece());
-						//tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].setPieceOff();
-						//tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].setPieceOn
-						//tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].setPieceOff();
-						
-						//(tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece());
-
-						
-					
-
-
-						lTurn = false;
-
-					}
-					else if(!lTurn && tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece().isValidLmove(toX, toY,detCapture,darkInCheck) && 
-							lTurn && tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece().isValidLmove(toX2, toY2,detCapture,darkInCheck) &&
-							tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece().getColor().equalsIgnoreCase("d") &&
-							tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece().getColor().equalsIgnoreCase("d")){
-
+				if(lTurn && !tiles[convert.convertY(doubleMatch.group(4))][convert.convertX(doubleMatch.group(3))].isOccupied &&
+						!tiles[convert.convertY(doubleMatch.group(8))][convert.convertX(doubleMatch.group(7))].isOccupied){
+					if(lTurn && tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece().isValidLCastle(toX,toY,lightInCheck) &&
+							lTurn && tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece().isValidLCastle(toX,toY,lightInCheck)){
+						System.out.println("made it");
 
 						tiles[convert.convertY(doubleMatch.group(4))][convert.convertX(doubleMatch.group(3))].setPieceOn
 						(tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece());
-
+						tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].setPieceOff();
 						tiles[convert.convertY(doubleMatch.group(8))][convert.convertX(doubleMatch.group(7))].setPieceOn
 						(tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece());
-
-						tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].setPieceOff();
 						tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].setPieceOff();
-						lTurn = true;
-					}
 
-					if(verbose){
-						board.updateBoard(tiles);
-					}
-					else{
-						board.nonVerboseUpdate(tiles);
+						lTurn = false;
 					}
 				}
 
+				else if(!lTurn && !tiles[convert.convertY(doubleMatch.group(4))][convert.convertX(doubleMatch.group(3))].isOccupied &&
+						!tiles[convert.convertY(doubleMatch.group(8))][convert.convertX(doubleMatch.group(7))].isOccupied){
+					if(!lTurn && tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece().isValidDCastle(toX,toY,darkInCheck) &&
+							!lTurn && tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece().isValidDCastle(toX,toY,darkInCheck)) { 
+
+						System.out.println("made it");
+
+						tiles[convert.convertY(doubleMatch.group(4))][convert.convertX(doubleMatch.group(3))].setPieceOn
+						(tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].getPiece());
+						tiles[convert.convertY(doubleMatch.group(2))][convert.convertX(doubleMatch.group(1))].setPieceOff();
+						tiles[convert.convertY(doubleMatch.group(8))][convert.convertX(doubleMatch.group(7))].setPieceOn
+						(tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].getPiece());
+						tiles[convert.convertY(doubleMatch.group(6))][convert.convertX(doubleMatch.group(5))].setPieceOff();
+						lTurn = true;
+					}
+				}
+
+				if(verbose){
+					board.updateBoard(tiles);
+				}
+				else{
+					board.nonVerboseUpdate(tiles);
+				}
 			}
+
+
+
+
 			else if(singleCap.find() && move.length() == 5){
 
 				int toX = convert.convertX(singleMatch.group(3)) - convert.convertX(singleMatch.group(1)); 
@@ -202,14 +201,14 @@ public class MoveController {
 			board.check("d",detCapture,this);
 			board.check("l",detCapture,this);
 		}
-	
+	}
 	public void pieceMoveFile(ArrayList<String> moves, boolean verbose){
 
 		for(String move : moves){
 
 			if(move != null){
 				tiles = board.getTiles();
-				
+
 				singleMatch = single.matcher(move.toLowerCase());
 				doubleMatch = twoMove.matcher(move.toLowerCase());
 				singleCap = capture.matcher(move.toLowerCase());

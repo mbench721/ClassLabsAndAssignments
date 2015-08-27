@@ -35,8 +35,14 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean isValidCastle() {
-		
+	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isValidDCastle(int toX, int toY, boolean dCheck) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 	

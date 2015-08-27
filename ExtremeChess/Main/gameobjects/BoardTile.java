@@ -10,8 +10,8 @@ public class BoardTile {
 	public String pieceType;
 	public String pieceColor;
 	public String tempPieceType;
-	public String tempPieceColor;
 	private Piece piece;
+	private Piece tempPiece;
 	public boolean isOccupied;
 	public boolean lightInCheck;
 	public boolean darkInCheck;
@@ -34,14 +34,12 @@ public class BoardTile {
 	public void printPiece(){
 		System.out.println(piece.getType());
 	}
-	public void swapPiece(BoardTile s){
+	public Piece swapPiece(Piece s){
+		this.tempPiece = this.getPiece();
+		setPieceOn(s);
+		s= this.tempPiece;
 		
-		this.tempPieceType = pieceType;
-		this.pieceType = s.pieceType;
-		s.pieceType = this.tempPieceType;
-		
-		
-		
+		return s;
 		
 		
 	}
