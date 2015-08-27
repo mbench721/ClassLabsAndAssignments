@@ -51,11 +51,11 @@ public class Rook extends Piece {
 	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
 		System.out.println(this.getX() + " " + this.getY());
 		System.out.println(castleValid);
-		if(!lCheck && this.getX() == 0 && this.getY() == 0 && castleValid == 1 || this.getX() == 7 && this.getY() == 0 && castleValid == 1){
+		if(!lCheck && this.getX() == 0 && this.getY() == 0 && castleValid == 1 ||!lCheck && this.getX() == 7 && this.getY() == 0 && castleValid == 1){
 			return true;
 			
 		}
-		else if(!lCheck && this.getX() == 0 && this.getY() == 7 && castleValid == 1 || this.getX() == 7 && this.getY() == 7 && castleValid == 1 ){
+		else if(!lCheck && this.getX() == 0 && this.getY() == 7 && castleValid == 1 || !lCheck && this.getX() == 7 && this.getY() == 7 && castleValid == 1 ){
 			return true;
 		}
 		else{
