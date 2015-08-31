@@ -21,10 +21,10 @@ public class MoveController {
 	private Board board;
 	private BoardTile [][] tiles = new BoardTile[8][8];
 	private PositionConverter convert;
-	private boolean detCapture;
+	public boolean detCapture;
 	private boolean lTurn;
-	public boolean lightInCheck;
-	public boolean darkInCheck;
+	public boolean lightInCheck = false;
+	public boolean darkInCheck = false;
 	private String[] sMatch = {"singleMatch.group(1)","singleMatch.group(2)","singleMatch.group(3)","singleMatch.group(4)"};
 	private String[] dMatch;
 	private String cMatch;
@@ -47,42 +47,43 @@ public class MoveController {
 			singleMatch = single.matcher(move.toLowerCase());
 			doubleMatch = twoMove.matcher(move.toLowerCase());
 			singleCap = capture.matcher(move.toLowerCase());
-			board.check("d",detCapture,this);
-			board.check("l",detCapture,this);
-			System.out.println(lightInCheck + " " + darkInCheck);
-
+			
+			
+			
 
 			if(singleMatch.find() && move.length() == 4){
-
+				
 				int toX = convert.convertX(singleMatch.group(3)) - convert.convertX(singleMatch.group(1)); 
 				int toY = convert.convertY(singleMatch.group(2))  - convert.convertY(singleMatch.group(4));
-				System.out.println(toX + toY);
-
+				System.out.println(lightInCheck + " " + darkInCheck);
+				
+				
 				detCapture = false;
+				
 
 				if(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].isOccupied()){
 					if(!tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].isOccupied() &&
 							!block.isBlocked(tiles, convert.convertX(singleMatch.group(3)), convert.convertY(singleMatch.group(4)), convert.convertX(singleMatch.group(1)), convert.convertY(singleMatch.group(2)))){
-
-						//board.check("d",detCapture,this);
+						
+						
 						if(lTurn && tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().getColor().equalsIgnoreCase("l") ){
-
+							board.check("d",detCapture,this);
 							if(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().isValidLmove(toX, toY,detCapture,lightInCheck)){
 								tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 								(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 								tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-								board.check("d",detCapture,this);
+								
 								lTurn = false;
 							}
 
 						}
 						else if(!lTurn &&  tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().getColor().equalsIgnoreCase("d")){
-							//	board.check("l",detCapture,this);
+							board.check("l",detCapture,this);
 							if(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().isValidDmove(toX, toY,detCapture,darkInCheck)){
 								tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 								(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 								tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-								board.check("l",detCapture,this);
+								
 								lTurn = true;
 							}
 
@@ -97,9 +98,10 @@ public class MoveController {
 							board.nonVerboseUpdate(tiles);
 						}
 					}
+					
 
 				}
-
+			
 			}
 			else if(doubleMatch.find() && move.length() == 8){
 				int toX = convert.convertX(doubleMatch.group(3)) - convert.convertX(doubleMatch.group(1)); 
@@ -161,14 +163,15 @@ public class MoveController {
 				int toY = convert.convertY(singleMatch.group(2))  - convert.convertY(singleMatch.group(4));
 				if(tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].isOccupied()){
 					detCapture = true;
-
+//					board.check("d",detCapture,this);
+//					board.check("l",detCapture,this);
 					if(!tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().getColor().equalsIgnoreCase(
 							tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].getPiece().getColor())
 							){
-
+						
 						if(lTurn && tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().getColor().equalsIgnoreCase("l")
 								&& tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().isValidLmove(toX, toY,detCapture,lightInCheck)){
-							//board.check("d",detCapture,this);
+							
 
 							tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 							(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
@@ -179,12 +182,12 @@ public class MoveController {
 						}
 						else if(!lTurn && tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().getColor().equalsIgnoreCase("d")
 								&& tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece().isValidDmove(toX, toY,detCapture,darkInCheck)){
-							//board.check("l",detCapture,this);
+							
 							tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 							(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 							tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-							board.check("l",detCapture,this);
-							//lTurn = true;
+							//board.check("l",detCapture,this);
+							lTurn = true;
 						}
 
 					}
@@ -198,8 +201,8 @@ public class MoveController {
 
 				}
 			}
-			board.check("d",detCapture,this);
-			board.check("l",detCapture,this);
+			//board.check("d",detCapture,this);
+			//board.check("l",detCapture,this);
 		}
 	}
 	public void pieceMoveFile(ArrayList<String> moves, boolean verbose){
@@ -216,8 +219,8 @@ public class MoveController {
 				singleMatch = single.matcher(move.toLowerCase());
 				doubleMatch = twoMove.matcher(move.toLowerCase());
 				singleCap = capture.matcher(move.toLowerCase());
-				board.check("d",detCapture,this);
-				board.check("l",detCapture,this);
+//				board.check("d",detCapture,this);
+//				board.check("l",detCapture,this);
 
 				if(singleMatch.find() && move.length() == 4){
 					int toX = convert.convertX(singleMatch.group(3)) - convert.convertX(singleMatch.group(1)); 
@@ -341,7 +344,7 @@ public class MoveController {
 								tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 								(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 								tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-								board.check("d",detCapture,this);
+								//board.check("d",detCapture,this);
 
 								System.out.println("lTurn");
 							}
@@ -350,7 +353,7 @@ public class MoveController {
 								tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 								(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 								tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-								board.check("l",detCapture,this);
+								//board.check("l",detCapture,this);
 
 							}
 

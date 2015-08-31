@@ -8,12 +8,12 @@ public class BoardController {
 
 	private Board board;
 	private PositionConverter convert;
-	private String [] whiteSetup = {"rla1","qla4","kla5","nla7","rla8","plb1","plb2","plb3","plb4","plb5","plb6","plb7","plb8"};
-	private String [] blackSetup = {"rdh1","qdh4","kdh5","bdh6","rdh8","pdg1","pdg2","pdg3","pdg4","pdg5","pdg6","pdg7","pdg8"};
-	//,"nla2","bla3"
-	//,"bla6"
-	//,"ndh2","bdh3"
-	//,"ndh7"
+	private String [] whiteSetup = {"rla1","nla2","bla3","qla4","kla5","bla6","nla7","rla8","plb2","plb3","plb4","plb6","plb7","plb8"};
+	private String [] blackSetup = {"rdh1","ndh2","bdh3","qdh4","kdh5","bdh6","ndh7","rdh8","pdg2","pdg3","pdg4","pdg6","pdg7","pdg8"};
+	
+	//,
+	//"pdg1","pdg1","plb5","pdg5"
+	//
 	public BoardController(Board b){
 
 		this.board = b;

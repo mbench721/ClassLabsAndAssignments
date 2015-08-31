@@ -31,7 +31,7 @@ public class Rook extends Piece {
 
 	@Override
 	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
-		if(!dCheck && toX <= 7&& toX >= -7 && toY == 0){
+		if(!dCheck && toX <= 7 && toX >= -7 && toY == 0){
 			--castleValid;
 			return true;
 		}

@@ -20,21 +20,13 @@ public class Pawn extends Piece{
 
 	@Override
 	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
-
-		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
-			validMovePos = 1;
-			return true;
-		}
-		else if(!cap && this.getColor().equalsIgnoreCase("l") && toY >= validMoveNeg && toY <= 0){
+		System.out.println(toX +  " " +toY);
+		
+		if(!lCheck && !cap && this.getColor().equalsIgnoreCase("l") && toY >= validMoveNeg && toY <= 0){
 			validMoveNeg = -1;
 			return true;
 		}
-		else if(cap && this.getColor().equalsIgnoreCase("d") && toY == validMovePos && toY >= 0 && toX != 0 ){
-			validMovePos = 1;
-
-			return true;
-		}
-		else if(cap && this.getColor().equalsIgnoreCase("l") && toY == validMoveNeg && toY <= 0 && toX !=0){
+		else if(!lCheck && cap && this.getColor().equalsIgnoreCase("l") && toY == validMoveNeg && toY <= 0 && toX !=0){
 			validMoveNeg = -1;
 			return true;
 		}
@@ -45,23 +37,17 @@ public class Pawn extends Piece{
 	}
 	@Override
 	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
-		if(!cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
+		if(!dCheck && !cap && this.getColor().equalsIgnoreCase("d")  && toY <= validMovePos && toY >= 0){
 			validMovePos = 1;
 			return true;
 		}
-		else if(!cap && this.getColor().equalsIgnoreCase("l") && toY >= validMoveNeg && toY <= 0){
-			validMoveNeg = -1;
-			return true;
-		}
-		else if(cap && this.getColor().equalsIgnoreCase("d") && toY == validMovePos && toY >= 0 && toX != 0 ){
+		
+		else if(!dCheck && cap && this.getColor().equalsIgnoreCase("d") && toY == validMovePos && toY >= 0 && toX != 0 ){
 			validMovePos = 1;
 
 			return true;
 		}
-		else if(cap && this.getColor().equalsIgnoreCase("l") && toY == validMoveNeg && toY <= 0 && toX !=0){
-			validMoveNeg = -1;
-			return true;
-		}
+		
 		else{
 			return false;
 		}

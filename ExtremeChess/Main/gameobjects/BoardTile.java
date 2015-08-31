@@ -18,7 +18,7 @@ public class BoardTile {
 	private Check chester;
 
 	public BoardTile(int x,int y){
-		
+
 		this.isOccupied = false;
 		this.lightInCheck = false;
 		this.darkInCheck = false;
@@ -27,7 +27,7 @@ public class BoardTile {
 		this.pieceType = "-";
 		this.pieceColor = "none";
 		chester = new Check();
-		
+
 
 	}
 
@@ -38,10 +38,10 @@ public class BoardTile {
 		this.tempPiece = this.getPiece();
 		setPieceOn(s);
 		s= this.tempPiece;
-		
+
 		return s;
-		
-		
+
+
 	}
 
 	public void setPieceOn(Piece p){
@@ -72,23 +72,37 @@ public class BoardTile {
 	public boolean isOccupied() {
 		return isOccupied;
 	}
-	public void detCheck(BoardTile[][] c,boolean cap,MoveController co){
-	
-		for(int i = 0; i < c.length; ++i){
+	public boolean detCheck(BoardTile[][] c,boolean cap){
+		boolean check = false;
+		if(this.pieceColor.equalsIgnoreCase("l")){
+			for(int i = 0; i < c.length; ++i){
 
-			for(int j = 0; j < c.length; ++j){
-				
+				for(int j = 0; j < c.length; ++j){
+					check = chester.lightCheck(c, this, i, j);
+					
 
-				chester.check(c, this, i, j,cap,co);
-				
-				
+
+
+
+				}
 			}
-		}
 
-	
+		}
+		else if(this.pieceColor.equalsIgnoreCase("d")){
+			for(int i = 0; i < c.length; ++i){
+
+				for(int j = 0; j < c.length; ++j){
+					check =  chester.darkCheck(c, this, i, j);
+
+
+				}
+			}
+
+		}
+		return check;
 	}
 }
-	
+
 
 
 

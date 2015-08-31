@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Application {
 
 	private ArrayList<String[]> matrix = new ArrayList<String[]>();
+	private ArrayList<String[]> matrix2 = new ArrayList<String[]>();
 
 
 	public Application(){
@@ -26,18 +27,38 @@ public class Application {
 
 		String[] temp = startCapture.split(",");
 		for(String line : temp){
-			System.out.println(line);
+			System.out.print(line);
 		}
 		matrix.add(temp);
 		while(!startCapture.isEmpty()){
 			startCapture = stan.nextLine();
 			temp = startCapture.split(",");
 			for(String line : temp){
-				System.out.println(line);
+				System.out.print(line);
 			}
 			matrix.add(temp);
 		}
 
-	}
+	
+	Matrix one = new Matrix(matrix);
+	System.out.println("Enter the matrix you would like to use, Press enter once when you are done entering rows");
+	System.out.println("and press enter twice to finalize the matrix.");
+	startCapture = stan.nextLine();
 
+	temp = startCapture.split(",");
+	for(String line : temp){
+		System.out.print(line);
+	}
+	matrix.add(temp);
+	while(!startCapture.isEmpty()){
+		startCapture = stan.nextLine();
+		temp = startCapture.split(",");
+		for(String line : temp){
+			System.out.print(line);
+		}
+		matrix2.add(temp);
+	}
+    Matrix two = new Matrix(matrix2);
+    
+}
 }

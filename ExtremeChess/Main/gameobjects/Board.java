@@ -85,8 +85,12 @@ public class Board {
 			for(int j = 0; j < tiles.length; ++j){
 				if(tiles[i][j].isOccupied()){
 
-					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].pieceColor.equalsIgnoreCase(c)){
-						tiles[i][j].detCheck(tiles,cap,co);
+					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && !tiles[i][j].pieceColor.equalsIgnoreCase("d")){
+						co.lightInCheck = tiles[i][j].detCheck(tiles,cap);
+						
+					}
+					else if(tiles[i][j].pieceType.equalsIgnoreCase("k") && !tiles[i][j].pieceColor.equalsIgnoreCase("l")){
+						co.darkInCheck = tiles[i][j].detCheck(tiles,cap);
 						
 					}
 
