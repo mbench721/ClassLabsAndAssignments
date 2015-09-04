@@ -23,10 +23,12 @@ public class Matrix {
 		int m = A.length;
         int n = A[0].length;
         double[][] C = new double[m][n];
-        for (int i = 0; i < m; i++)
-            for (int j = 0; j < n; j++)
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+            	
                 C[i][j] = A[i][j] + B[i][j];
-        
+            }
+        }
 		return C;
 		
 		
@@ -42,10 +44,15 @@ public class Matrix {
         int nB = B[0].length;
         if (nA != mB) throw new RuntimeException("Illegal matrix dimensions.");
         double[][] C = new double[mA][nB];
-        for (int i = 0; i < mA; i++)
-            for (int j = 0; j < nB; j++)
-                for (int k = 0; k < nA; k++)
+        for (int i = 0; i < mA; i++){
+            for (int j = 0; j < nB; j++){
+                for (int k = 0; k < nA; k++){
                     C[i][j] += this.matrix[i][k] * B[k][j];
+                
+        System.out.println(this.matrix[i][k] + " " + B[k][j]);
+                }
+            }
+        }
         return C;
 		
 	}

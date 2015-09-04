@@ -72,7 +72,7 @@ public class Application {
 
 		for(int i = 0;i < size;++i){
 			userMatrix[start][i] = Double.parseDouble(tempS[i]);
-
+			
 		}
 		++start;
 		
@@ -80,6 +80,7 @@ public class Application {
 			startCapture = stan.nextLine();
 			if(!startCapture.isEmpty()){
 				tempS = startCapture.split(",");
+			
 				for(int i = 0;i < size ;++i){
 					userMatrix[start][i] = Double.parseDouble(tempS[i]);
 					
@@ -92,18 +93,22 @@ public class Application {
 		}
 		Matrix first = new Matrix(userMatrix);
 
+		System.out.println("Alright, How big of matrixes will we be adding? Keep in mind you can only add equal matrixes. enter in format rowsXcolumns");
+		startCapture = stan.nextLine();
+	double [][]	userMatrix2 = new double[Integer.valueOf(startCapture.substring(0, startCapture.indexOf("x")))][Integer.valueOf(startCapture.substring(startCapture.indexOf("x") + 1))];
 
 
 		System.out.println("Enter the matrix you would like to add to it, Press enter once when you are done entering rows");
 		System.out.println("and press enter twice to finalize the matrix.");
 		startCapture = stan.nextLine();
-
+	
+		
 		tempS = startCapture.split(",");
 		size = tempS.length;
 		start = 0;
 
 		for(int i = 0;i < size;++i){
-			userMatrix[start][i] = Double.parseDouble(tempS[i]);
+			userMatrix2[start][i] = Double.parseDouble(tempS[i]);
 
 		}
 		++start;
@@ -114,7 +119,7 @@ public class Application {
 			if(!startCapture.isEmpty()){
 				tempS = startCapture.split(",");
 				for(int i = 0;i < size;++i){
-					userMatrix[start][i] = Double.parseDouble(tempS[i]);
+					userMatrix2[start][i] = Double.parseDouble(tempS[i]);
 					
 
 				}
@@ -123,7 +128,7 @@ public class Application {
 
 
 		}
-		Matrix second = new Matrix(userMatrix);
+		Matrix second = new Matrix(userMatrix2);
 		Matrix sum = new Matrix(first.addition(second.getMatrix()));
 		sums.add(sum);
 		System.out.println("your result was :");
@@ -171,7 +176,7 @@ public class Application {
 		Matrix first = new Matrix(userMatrix);
 		System.out.println("Alright, How big of matrix will we be Multiplying? enter in format rowsXcolumns");
 		startCapture = stan.nextLine();
-		userMatrix = new double[Integer.valueOf(startCapture.substring(0, startCapture.indexOf("x")))][Integer.valueOf(startCapture.substring(startCapture.indexOf("x") + 1))];
+		double [][]userMatrix2 = new double[Integer.valueOf(startCapture.substring(0, startCapture.indexOf("x")))][Integer.valueOf(startCapture.substring(startCapture.indexOf("x") + 1))];
 
 
 		System.out.println("Enter the matrix you would like to use, Press enter once when you are done entering rows");
@@ -183,7 +188,7 @@ public class Application {
 		start = 0;
 
 		for(int i = 0;i < size;++i){
-			userMatrix[start][i] = Double.parseDouble(tempS[i]);
+			userMatrix2[start][i] = Double.parseDouble(tempS[i]);
 			
 
 		}
@@ -195,7 +200,7 @@ public class Application {
 			if(!startCapture.isEmpty()){
 				tempS = startCapture.split(",");
 				for(int i = 0;i < size;++i){
-					userMatrix[start][i] = Double.parseDouble(tempS[i]);
+					userMatrix2[start][i] = Double.parseDouble(tempS[i]);
 					
 
 				}
@@ -204,7 +209,7 @@ public class Application {
 
 
 		}
-		Matrix second = new Matrix(userMatrix);
+		Matrix second = new Matrix(userMatrix2);
 		Matrix prod = new Matrix(first.multiplication(second.getMatrix()));
 		products.add(prod);
 		for(int i = 0; i < prod.getMatrix().length; ++ i){

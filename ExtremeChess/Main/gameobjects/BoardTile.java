@@ -21,7 +21,6 @@ public class BoardTile {
 	private CheckBlocked blocked;
 
 	public BoardTile(int x,int y){
-
 		this.isOccupied = false;
 		this.lightInCheck = false;
 		this.darkInCheck = false;
@@ -31,8 +30,6 @@ public class BoardTile {
 		this.pieceColor = "none";
 		chester = new Check();
 		blocked = new CheckBlocked();
-
-
 	}
 
 	public void printPiece(){
@@ -44,8 +41,6 @@ public class BoardTile {
 		s= this.tempPiece;
 
 		return s;
-
-
 	}
 
 	public void setPieceOn(Piece p){
@@ -80,25 +75,15 @@ public class BoardTile {
 		boolean check = false;
 		if(this.pieceColor.equalsIgnoreCase("l")){
 			for(int i = 0; i < c.length; ++i){
-
 				for(int j = 0; j < c.length; ++j){
-					
 					if(chester.lightCheck(c, this, i, j) && !blocked.isBlocked(c,c[i][j].xPos,c[i][j].yPos,this.xPos,this.yPos)){
 						System.out.println("Light in check");
 						check = true;
-
-						
 					}
-
 				}
 			}
-
 		}
-
 		return check;
-
-
-
 	}
 	public boolean detDcheck(BoardTile[][] c,boolean cap,MoveController m){
 		boolean check = false;
@@ -113,18 +98,11 @@ public class BoardTile {
 					if(chester.darkCheck(c, this, i, j) && !blocked.isBlocked(c,c[i][j].xPos,c[i][j].yPos,this.xPos,this.yPos)){
 						System.out.println("Dark in check");
 						check = true;
-						
-
 					}
-
 				}
 			}
-
 		}
 		return check;
-
-
-
 	}
 }
 

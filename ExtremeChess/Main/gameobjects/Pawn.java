@@ -12,15 +12,10 @@ public class Pawn extends Piece{
 	public Pawn(boolean available, int x, int y,String c,String t) {
 		super(available, x, y,c,t);
 
-
 		control = new PieceController(this);
 	}
-
-
-
 	@Override
 	public boolean isValidLmove(int toX, int toY,boolean cap,boolean lCheck) {
-		System.out.println(toX +  " " +toY);
 		
 		if(!lCheck && !cap && this.getColor().equalsIgnoreCase("l") && toY >= validMoveNeg && toY <= 0){
 			validMoveNeg = -1;
@@ -55,7 +50,6 @@ public class Pawn extends Piece{
 
 	@Override
 	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

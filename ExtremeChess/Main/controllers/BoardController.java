@@ -10,8 +10,6 @@ public class BoardController {
 	private PositionConverter convert;
 	private String [] whiteSetup = {"rla1","nla2","bla3","qla4","kla5","bla6","nla7","rla8","plb1","plb2","plb3","plb4","plb5","plb6","plb7","plb8"};
 	private String [] blackSetup = {"rdh1","ndh2","bdh3","qdh4","kdh5","bdh6","ndh7","rdh8","pdg1","pdg2","pdg3","pdg4","pdg5","pdg6","pdg7","pdg8"};
-	
-	
 	public BoardController(Board b){
 
 		this.board = b;
@@ -53,8 +51,6 @@ public class BoardController {
 	}
 
 	public void pieceToPlace(String t,String c,String x,String y){
-		
-		
 		
 		BoardTile[][] update = board.getTiles();
 
@@ -138,8 +134,6 @@ public class BoardController {
 			}
 
 		}
-
-	
 	}
 	public void placePieces(){
 		BoardTile[][] update = board.getTiles();

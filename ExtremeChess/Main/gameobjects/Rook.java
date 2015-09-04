@@ -45,13 +45,9 @@ public class Rook extends Piece {
 
 	}
 
-
-
 	@Override
 	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
-		System.out.println(this.getX() + " " + this.getY());
 
-		System.out.println(toX + " " + toY);
 		if(!lCheck && this.getX() == 0 && this.getY() == 0 && castleValid == 1 && toX == 3 && toY == 0){
 
 			return true;

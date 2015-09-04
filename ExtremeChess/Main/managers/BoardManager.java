@@ -22,17 +22,11 @@ public class BoardManager {
 	BoardController boardControl;
 	MoveController moveControl;
 	private boolean verbose;
-	
-
-
 	public BoardManager(String[] file){
-
-
 
 		for(String conv : file){
 			moves.add(conv);
 		}
-
 		createBoard();
 		createBoardControl();
 		createMoveControl();
@@ -65,13 +59,13 @@ public class BoardManager {
 		}
 
 		if(verbose && moves.get(0).equalsIgnoreCase("v") && moves.size() >=2){
-			
+
 			createMovesList();
 
 			moveControl.pieceMoveFile(moves, verbose);
 		}
 		else if(verbose && moves.get(0).equalsIgnoreCase("v") && moves.size() ==1){
-			
+
 			Scanner stan = new Scanner(System.in);
 			String input;
 			input = stan.nextLine();
@@ -80,21 +74,18 @@ public class BoardManager {
 			while(!input.isEmpty()){
 				input = stan.nextLine();
 				moveControl.moveControl(input,verbose);
-				
 
 			}
 
 		}
 		else if(!verbose && moves.size() == 1 && !moves.get(0).equalsIgnoreCase("v")){
-			
+
 			createMovesList();
 			moveControl.pieceMoveFile(moves,verbose);
 			board.generateBoard();
-			
-
 		}
 		else{
-		
+
 			Scanner stan = new Scanner(System.in);
 			String input;
 
@@ -104,23 +95,17 @@ public class BoardManager {
 			while(!input.isEmpty()){
 				input = stan.nextLine();
 				moveControl.moveControl(input,verbose);
-				
-				//System.out.println(lTurn);
 			}
 			board.generateBoard();
 		}
 
 		System.out.println("finish");
 	}
-
-
-
-
 	public void createMovesList(){
 		fileCreate = new FileIo(moves);
 		parse = new Parser(fileCreate.getMovesFile());
 		moves = parse.readFile();
 	}
-	
+
 }
 

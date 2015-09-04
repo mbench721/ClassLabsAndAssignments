@@ -68,12 +68,12 @@ public class King extends Piece {
 		//System.out.println(this.getX() + " " + this.getY());
 		
 		if(!lCheck && this.getX() == 0 && this.getY() == 4 && castleValid == 1 && toX == 2 && toY == 0 ){
-			System.out.println("King");
+			
 			return true;
 			
 		}
 		else if(!lCheck && this.getX() == 0 && this.getY() == 4 && castleValid == 1 && toX == -2 && toY == 0 ){
-			System.out.println("King");
+			
 			return true;
 			
 		}
@@ -86,9 +86,9 @@ public class King extends Piece {
 
 	@Override
 	public boolean isValidDCastle(int toX, int toY, boolean dCheck) {
-		System.out.println(this.getX() + " " + this.getY());
+	
 		if(!dCheck && this.getX() == 7 && this.getY() == 4 && castleValid == 1 && toX == 2 && toY == 0 ){
-			System.out.println("King");
+			
 			return true;
 			
 		}

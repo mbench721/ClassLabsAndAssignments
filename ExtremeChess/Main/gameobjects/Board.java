@@ -75,8 +75,6 @@ public class Board {
 		System.out.println("");
 		System.out.println(" ---------------------------------");
 	} 
-
-
 	public void nonVerboseUpdate(BoardTile[][] v){
 		tiles = v;
 	}
@@ -90,18 +88,11 @@ public class Board {
 
 					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].getPiece().getColor().equalsIgnoreCase("l")){
 						test = tiles[i][j].detLcheck(tiles,cap,co);
-						
 					}
-
-
-
-
 				}
 			}
 		}
-		System.out.println(test);
 		return test;
-
 	}
 	public boolean checkD(String c,boolean cap,MoveController co){
 		boolean test = false;
@@ -110,25 +101,16 @@ public class Board {
 			for(int j = 0; j < tiles.length; ++j){
 				if(tiles[i][j].isOccupied()){
 
-
 					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].getPiece().getColor().equalsIgnoreCase("d")){
 						test = tiles[i][j].detDcheck(tiles,cap,co);
 						
 					}
-
-
-
 				}
 			}
 		}
-		System.out.println(test);
 		return test;
 
 	}
-
-
-
-
 }
 
 

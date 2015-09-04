@@ -26,6 +26,4 @@ public class Main {
 	//	3-	Where the operation is not defined, your program should give an error.
 	//	a.	Use exceptions properly.
 
-
-
 }
