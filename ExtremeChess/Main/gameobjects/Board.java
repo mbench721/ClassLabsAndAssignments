@@ -23,19 +23,20 @@ public class Board {
 	public BoardTile[][] setSquares(BoardTile[][] u) {
 
 		for(int i = 0; i < tiles.length; ++i){
-
+			
 			for(int j = 0; j < tiles.length; ++j){
 
 				tiles[i][j] = new BoardTile(i,j);
-
+				
 			}
 		}
-
+		
 		return tiles;
 	}
 
 	public void generateBoard(){
 		int i = 1;
+		
 		System.out.print("   A  " + " B  " + " C  " + " D  " + " E  " + " F  " + " G  " + " H");
 		for (int row = 0; row < boardSize; row++)
 		{
@@ -52,6 +53,7 @@ public class Board {
 		}
 		System.out.println("");
 		System.out.println(" ---------------------------------");
+		
 	} 
 	public void updateBoard(BoardTile[][] u){
 		tiles = u;
@@ -79,26 +81,51 @@ public class Board {
 		tiles = v;
 	}
 
-	public void check(String c,boolean cap,MoveController co){
+	public boolean checkL(String c,boolean cap,MoveController co){
+		boolean test = false;
 		for(int i = 0; i < tiles.length; ++i){
 
 			for(int j = 0; j < tiles.length; ++j){
 				if(tiles[i][j].isOccupied()){
 
-					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && !tiles[i][j].pieceColor.equalsIgnoreCase("d")){
-						co.lightInCheck = tiles[i][j].detCheck(tiles,cap);
+					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].getPiece().getColor().equalsIgnoreCase("l")){
+						test = tiles[i][j].detLcheck(tiles,cap,co);
 						
 					}
-					else if(tiles[i][j].pieceType.equalsIgnoreCase("k") && !tiles[i][j].pieceColor.equalsIgnoreCase("l")){
-						co.darkInCheck = tiles[i][j].detCheck(tiles,cap);
-						
-					}
+
+
+
 
 				}
 			}
 		}
+		System.out.println(test);
+		return test;
 
 	}
+	public boolean checkD(String c,boolean cap,MoveController co){
+		boolean test = false;
+		for(int i = 0; i < tiles.length; ++i){
+
+			for(int j = 0; j < tiles.length; ++j){
+				if(tiles[i][j].isOccupied()){
+
+
+					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].getPiece().getColor().equalsIgnoreCase("d")){
+						test = tiles[i][j].detDcheck(tiles,cap,co);
+						
+					}
+
+
+
+				}
+			}
+		}
+		System.out.println(test);
+		return test;
+
+	}
+
 
 
 

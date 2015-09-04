@@ -1,7 +1,9 @@
 package gameobjects;
 
 import controllers.MoveController;
+import utilities.BlockedChecker;
 import utilities.Check;
+import utilities.CheckBlocked;
 
 public class BoardTile {
 
@@ -16,6 +18,7 @@ public class BoardTile {
 	public boolean lightInCheck;
 	public boolean darkInCheck;
 	private Check chester;
+	private CheckBlocked blocked;
 
 	public BoardTile(int x,int y){
 
@@ -27,6 +30,7 @@ public class BoardTile {
 		this.pieceType = "-";
 		this.pieceColor = "none";
 		chester = new Check();
+		blocked = new CheckBlocked();
 
 
 	}
@@ -72,34 +76,55 @@ public class BoardTile {
 	public boolean isOccupied() {
 		return isOccupied;
 	}
-	public boolean detCheck(BoardTile[][] c,boolean cap){
+	public boolean detLcheck(BoardTile[][] c,boolean cap,MoveController m){
 		boolean check = false;
 		if(this.pieceColor.equalsIgnoreCase("l")){
 			for(int i = 0; i < c.length; ++i){
 
 				for(int j = 0; j < c.length; ++j){
-					check = chester.lightCheck(c, this, i, j);
 					
+					if(chester.lightCheck(c, this, i, j) && !blocked.isBlocked(c,c[i][j].xPos,c[i][j].yPos,this.xPos,this.yPos)){
+						System.out.println("Light in check");
+						check = true;
 
-
-
+						
+					}
 
 				}
 			}
 
 		}
-		else if(this.pieceColor.equalsIgnoreCase("d")){
+
+		return check;
+
+
+
+	}
+	public boolean detDcheck(BoardTile[][] c,boolean cap,MoveController m){
+		boolean check = false;
+
+		if(this.pieceColor.equalsIgnoreCase("d")){
+
 			for(int i = 0; i < c.length; ++i){
 
 				for(int j = 0; j < c.length; ++j){
-					check =  chester.darkCheck(c, this, i, j);
+					
 
+					if(chester.darkCheck(c, this, i, j) && !blocked.isBlocked(c,c[i][j].xPos,c[i][j].yPos,this.xPos,this.yPos)){
+						System.out.println("Dark in check");
+						check = true;
+						
+
+					}
 
 				}
 			}
 
 		}
 		return check;
+
+
+
 	}
 }
 

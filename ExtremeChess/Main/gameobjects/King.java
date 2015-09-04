@@ -19,16 +19,16 @@ public class King extends Piece {
 	
 	@Override
 	public boolean isValidLmove(int toX,int toY,boolean cap,boolean lCheck){
-		if(toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
-			--castleValid;
+		if(!lCheck && toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
+			//--castleValid;
 			return true;	
 		}
-		else if(toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
-			--castleValid;
+		else if(!lCheck && toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
+			//--castleValid;
 			return true;
 		}
-		else if( Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
-			--castleValid;
+		else if(!lCheck && Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
+			//--castleValid;
 			return true;
 					
 		}
@@ -41,16 +41,16 @@ public class King extends Piece {
 
 	@Override
 	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
-		if(toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
-			--castleValid;
+		if(!dCheck && toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
+			//--castleValid;
 			return true;	
 		}
-		else if(toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
-			--castleValid;
+		else if( !dCheck && toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
+			//--castleValid;
 			return true;
 		}
-		else if(Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
-			--castleValid;
+		else if(!dCheck && Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
+			//--castleValid;
 			return true;
 					
 		}
@@ -66,7 +66,7 @@ public class King extends Piece {
 	@Override
 	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
 		//System.out.println(this.getX() + " " + this.getY());
-		System.out.println(toX + " " + toY);
+		
 		if(!lCheck && this.getX() == 0 && this.getY() == 4 && castleValid == 1 && toX == 2 && toY == 0 ){
 			System.out.println("King");
 			return true;
