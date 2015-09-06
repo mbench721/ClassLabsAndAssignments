@@ -56,7 +56,8 @@ public abstract class Piece extends StackPane  {
 		this.box.getChildren().add(this.imageView);
 	}
 	public void reLocate(StackPane box){
-		 this.imageView.relocate(box.getLayoutX(), this.getScaleY());
+		this.setLocation(box.getLayoutX(), box.getLayoutY());
+		 this.imageView.relocate(box.getLayoutX(), box.getLayoutY());
 		 this.relocate(box.getLayoutX(), box.getLayoutY());
 	}
 
@@ -87,9 +88,9 @@ public abstract class Piece extends StackPane  {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public void setLocation(int x,int y){
-		this.x = x;
-		this.y = y;
+	public void setLocation(double d,double e){
+		this.x = d;
+		this.y = e;
 	}
 	//	public void setDragListeners(final Piece block) {
 	//

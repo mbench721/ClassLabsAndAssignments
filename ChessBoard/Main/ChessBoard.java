@@ -5,30 +5,30 @@ import gameobjects.Rook;
 
 import java.util.ArrayList;
 
+
+
+
+
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
+import javafx.scene.Group; 
 
 
 public class ChessBoard extends Application {
-	BorderPane borderLayer;
 	Pane boardLayer;
 	Pane pieceLayer;
 	Image whiteImage;
@@ -41,7 +41,6 @@ public class ChessBoard extends Application {
 		//Group piece = new Group();
 		  pieceLayer = new Pane();
 		  boardLayer = new Pane();
-		  borderLayer = new BorderPane();
 		final int size = 8 ;
 		Image bRook = new Image(getClass().getResource("bRook.png").toExternalForm());
 		for (int row = 0; row < size; row++) {
@@ -65,7 +64,7 @@ public class ChessBoard extends Application {
 				square.setStyle("-fx-background-color: "+color+";");
 				
 				root.add(square, col, row);
-				System.out.println(col + " " + row);
+				
 				
 			}
 		}
@@ -76,67 +75,30 @@ public class ChessBoard extends Application {
 		createPlayers();
 		for (BoardTile block : nodes) {
 			
-				setDragListeners(block,black.get(0));
+				setDragListeners(block);
 			
 			
 		}
+		setMoveListeners(black.get(0));
 		
-		borderLayer.setCenter(root);
-		borderLayer.setTop(makeMenu());
-		primaryStage.setScene(new Scene(borderLayer, 1000, 750));
+		primaryStage.setScene(new Scene(root, 1000, 750));
 		primaryStage.show();
 		
 	//	root.getChildren().add(boardLayer);
 		
 		
 	}
-	
-	private MenuBar makeMenu()
-	    {
-	        MenuBar menuBar = new MenuBar();
-	        Menu menuFile = new Menu("File");  
-	        Menu menuHelp = new Menu("Help");
-	        MenuItem howTo = new MenuItem("How To Play");
-	        MenuItem exit = new MenuItem("Quit");
-//	        
-//	        howTo.setOnAction(new EventHandler<ActionEvent>() {
-//
-//	            @Override
-//	            public void handle(ActionEvent e) {
-//	            	
-//	            	 Stage stage = new Stage();
-//	                 stage.setTitle("My New Stage Title");
-//	                 stage.setScene(new Scene(root, 450, 450));
-//	                 stage.show();
-//	            }
-//	        });
-//	        
-	        exit.setOnAction(new EventHandler<ActionEvent>() {
-
-	            @Override
-	            public void handle(ActionEvent e) {
-	            	System.exit(0);
-	            }
-	        });
-	        menuFile.getItems().add(exit);
-	        menuHelp.getItems().add(howTo);
-	        menuBar.getMenus().addAll(menuFile, menuHelp);
-	        return menuBar;
-	    }
-
-	
 	 class Delta { double x, y; }
-	public void setDragListeners(final BoardTile block,final Piece piece) {
-		 final Delta dragDelta = new Delta();
+	public void setDragListeners(final BoardTile block) {
+		
 
 		block.setOnMousePressed(new EventHandler<MouseEvent>() {
 			
 			@Override public void handle(MouseEvent mouseEvent) {
-				dragDelta.x = piece.getLayoutX() - mouseEvent.getSceneX();
-	            dragDelta.y = piece.getLayoutY() - mouseEvent.getSceneY();
-	            System.out.println(piece.getLayoutX());
+				
+	            
 				block.setStyle("-fx-background-color:red;");
-				piece.setCursor(Cursor.CLOSED_HAND);
+				
 
 				block.setCursor(Cursor.CLOSED_HAND);
 
@@ -154,11 +116,38 @@ public class ChessBoard extends Application {
 					block.setStyle("-fx-background-color:black;");
 				}
 				
-				piece.reLocate(nodes.get(1));	
+				
 				
 			}
 		});
-		block.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		
+	}
+	public void setMoveListeners(final Piece piece) {
+		 final Delta dragDelta = new Delta();
+
+		piece.setOnMousePressed(new EventHandler<MouseEvent>() {
+			
+			@Override public void handle(MouseEvent mouseEvent) {
+				dragDelta.x = piece.getLayoutX() - mouseEvent.getSceneX();
+	            dragDelta.y = piece.getLayoutY() - mouseEvent.getSceneY();
+	           
+				
+				piece.setCursor(Cursor.CLOSED_HAND);
+
+
+			}
+		});
+//		piece.setOnMouseReleased(new EventHandler<MouseEvent>() {
+//			@Override public void handle(MouseEvent mouseEvent) {
+//				
+//				
+//				
+//				
+//				piece.reLocate(nodes.get(1));	
+//				
+//			}
+//		});
+		piece.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent mouseEvent) {
 				
 				
