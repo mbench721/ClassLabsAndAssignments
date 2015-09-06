@@ -1,0 +1,106 @@
+package gameobjects;
+
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+
+
+
+
+
+public class King extends Piece {
+	
+	//private PieceController control;
+	private int castleValid;
+
+	public King(StackPane layer, int x, int y,String c,String t,Image i) {
+		super(layer, x, y,c,t,i);
+		
+		//control = Snew PieceController(this);
+		castleValid = 1;
+		
+	}
+	
+	@Override
+	public boolean isValidLmove(int toX,int toY,boolean cap,boolean lCheck){
+		if(!lCheck && toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
+			//--castleValid;
+			return true;	
+		}
+		else if(!lCheck && toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
+			//--castleValid;
+			return true;
+		}
+		else if(!lCheck && Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
+			//--castleValid;
+			return true;
+					
+		}
+		
+		else{
+			return false;
+		}
+		
+	}
+
+	@Override
+	public boolean isValidDmove(int toX, int toY, boolean cap,boolean dCheck) {
+		if(!dCheck && toX <= 1 && toY <= 1 && toX >= 0 && toY >= 0) {
+			//--castleValid;
+			return true;	
+		}
+		else if( !dCheck && toX >= -1 && toY >= -1 && toX <=  0 && toY <= 0){
+			//--castleValid;
+			return true;
+		}
+		else if(!dCheck && Math.abs(toX) == Math.abs(toY) && toX <= 1 && toY <=1 && toX >= -1 && toY >= -1){
+			//--castleValid;
+			return true;
+					
+		}
+		
+		else{
+			return false;
+		}
+	}
+
+
+	
+
+	@Override
+	public boolean isValidLCastle(int toX, int toY, boolean lCheck) {
+		//System.out.println(this.getX() + " " + this.getY());
+		
+		if(!lCheck && this.getX() == 0 && this.getY() == 4 && castleValid == 1 && toX == 2 && toY == 0 ){
+			
+			return true;
+			
+		}
+		else if(!lCheck && this.getX() == 0 && this.getY() == 4 && castleValid == 1 && toX == -2 && toY == 0 ){
+			
+			return true;
+			
+		}
+		else{
+			return false;
+		}
+		
+		
+	}
+
+	@Override
+	public boolean isValidDCastle(int toX, int toY, boolean dCheck) {
+	
+		if(!dCheck && this.getX() == 7 && this.getY() == 4 && castleValid == 1 && toX == 2 && toY == 0 ){
+			
+			return true;
+			
+		}
+		else if(!dCheck && this.getX() == 7 && this.getY() == 4 && castleValid == 1 && toX == -2 && toY == 0 ){
+			return true;
+			
+		}
+		return false;
+		
+	}   	
+}
