@@ -5,31 +5,30 @@ import gameobjects.Rook;
 
 import java.util.ArrayList;
 
-
-
-
-import application.PlayerController;
-
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.scene.Group; 
 
 
 public class ChessBoard extends Application {
+	BorderPane borderLayer;
 	Pane boardLayer;
 	Pane pieceLayer;
 	Image whiteImage;
@@ -42,6 +41,7 @@ public class ChessBoard extends Application {
 		//Group piece = new Group();
 		  pieceLayer = new Pane();
 		  boardLayer = new Pane();
+		  borderLayer = new BorderPane();
 		final int size = 8 ;
 		Image bRook = new Image(getClass().getResource("bRook.png").toExternalForm());
 		for (int row = 0; row < size; row++) {
@@ -81,13 +81,50 @@ public class ChessBoard extends Application {
 			
 		}
 		
-		primaryStage.setScene(new Scene(root, 1000, 750));
+		borderLayer.setCenter(root);
+		borderLayer.setTop(makeMenu());
+		primaryStage.setScene(new Scene(borderLayer, 1000, 750));
 		primaryStage.show();
 		
 	//	root.getChildren().add(boardLayer);
 		
 		
 	}
+	
+	private MenuBar makeMenu()
+	    {
+	        MenuBar menuBar = new MenuBar();
+	        Menu menuFile = new Menu("File");  
+	        Menu menuHelp = new Menu("Help");
+	        MenuItem howTo = new MenuItem("How To Play");
+	        MenuItem exit = new MenuItem("Quit");
+//	        
+//	        howTo.setOnAction(new EventHandler<ActionEvent>() {
+//
+//	            @Override
+//	            public void handle(ActionEvent e) {
+//	            	
+//	            	 Stage stage = new Stage();
+//	                 stage.setTitle("My New Stage Title");
+//	                 stage.setScene(new Scene(root, 450, 450));
+//	                 stage.show();
+//	            }
+//	        });
+//	        
+	        exit.setOnAction(new EventHandler<ActionEvent>() {
+
+	            @Override
+	            public void handle(ActionEvent e) {
+	            	System.exit(0);
+	            }
+	        });
+	        menuFile.getItems().add(exit);
+	        menuHelp.getItems().add(howTo);
+	        menuBar.getMenus().addAll(menuFile, menuHelp);
+	        return menuBar;
+	    }
+
+	
 	 class Delta { double x, y; }
 	public void setDragListeners(final BoardTile block,final Piece piece) {
 		 final Delta dragDelta = new Delta();
