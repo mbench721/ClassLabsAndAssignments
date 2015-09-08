@@ -23,31 +23,30 @@ public class BoardManager {
 	MoveController moveControl;
 	private boolean verbose;
 	public BoardManager(String[] file){
-
+		createBoard();
 		for(String conv : file){
 			moves.add(conv);
 		}
-		createBoard();
-		createBoardControl();
+		
+		
 		createMoveControl();
 		run();
 
 	}
 	private void createBoard(){
 		board = new Board();
+		boardControl = new BoardController(board);
+		boardControl.placePieces();
 
 	}
-	private void createBoardControl(){
-
-		boardControl = new BoardController(board);	
-	}
+	
 
 	private void createMoveControl(){
-		moveControl = new MoveController(board);
+		moveControl = new MoveController(boardControl);
 	}
 	private void run(){
 
-		boardControl.placePieces();
+		
 
 		if(moves.size() >= 1 && moves.get(0).equalsIgnoreCase("v")){
 
@@ -82,7 +81,7 @@ public class BoardManager {
 
 			createMovesList();
 			moveControl.pieceMoveFile(moves,verbose);
-			board.generateBoard();
+			boardControl.generateBoard();
 		}
 		else{
 
@@ -96,7 +95,7 @@ public class BoardManager {
 				input = stan.nextLine();
 				moveControl.moveControl(input,verbose);
 			}
-			board.generateBoard();
+			boardControl.generateBoard();
 		}
 
 		System.out.println("finish");

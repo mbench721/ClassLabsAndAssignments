@@ -15,15 +15,13 @@ public class BoardTile {
 	private Piece piece;
 	private Piece tempPiece;
 	public boolean isOccupied;
-	public boolean lightInCheck;
-	public boolean darkInCheck;
+	
 	private Check chester;
 	private CheckBlocked blocked;
 
 	public BoardTile(int x,int y){
 		this.isOccupied = false;
-		this.lightInCheck = false;
-		this.darkInCheck = false;
+		
 		this.xPos = x;
 		this.yPos = y;
 		this.pieceType = "-";

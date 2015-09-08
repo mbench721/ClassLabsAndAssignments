@@ -34,14 +34,16 @@ public class MoveController {
 	private String[] sMatch = {"singleMatch.group(1)","singleMatch.group(2)","singleMatch.group(3)","singleMatch.group(4)"};
 	private String[] dMatch;
 	private String cMatch;
+	private BoardController boardControl;
 	private BlockedChecker block;
 	private boolean detCap;
 
-	public MoveController(Board b){
+	public MoveController(BoardController b){
 
 		this.block = new BlockedChecker();
 		this.convert = new PositionConverter();
-		this.board = b;
+		this.boardControl = b;
+		this.board = boardControl.getBoard();
 		this.tiles = board.getTiles();
 		detCapture = false;
 		lTurn = true;
@@ -66,14 +68,14 @@ public class MoveController {
 								tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 								(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 								tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-								if(board.checkL("l",detCapture,this)){
+								if(boardControl.checkL("l",detCapture,this)){
 									tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOn
 									(tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].getPiece());
 									tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOff();
 									System.out.println("King still in check try again.");
 									lTurn = true;
 								}
-								else if(!board.checkL("l",detCapture,this)){
+								else if(!boardControl.checkL("l",detCapture,this)){
 
 									lTurn = false;
 								}
@@ -84,13 +86,13 @@ public class MoveController {
 								tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 								(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 								tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-								if(board.checkD("d",detCapture,this)){
+								if(boardControl.checkD("d",detCapture,this)){
 									tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOn
 									(tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].getPiece());
 									tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOff();
 									System.out.println("King still in check try again.");
 									lTurn = false;
-									board.updateBoard(tiles);
+									boardControl.updateBoard(tiles);
 								}
 								else{
 
@@ -100,10 +102,10 @@ public class MoveController {
 
 						}
 						if(verbose){
-							board.updateBoard(tiles);
+							boardControl.updateBoard(tiles);
 						}
 						else{
-							board.nonVerboseUpdate(tiles);
+							boardControl.nonVerboseUpdate(tiles);
 						}
 					}
 				}
@@ -150,10 +152,10 @@ public class MoveController {
 				}
 
 				if(verbose){
-					board.updateBoard(tiles);
+					boardControl.updateBoard(tiles);
 				}
 				else{
-					board.nonVerboseUpdate(tiles);
+					boardControl.nonVerboseUpdate(tiles);
 				}
 			}
 
@@ -189,10 +191,10 @@ public class MoveController {
 					}
 
 					if(verbose){
-						board.updateBoard(tiles);
+						boardControl.updateBoard(tiles);
 					}
 					else{
-						board.nonVerboseUpdate(tiles);
+						boardControl.nonVerboseUpdate(tiles);
 					}
 
 				}
@@ -231,14 +233,14 @@ public class MoveController {
 									tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 									(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 									tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-									if(board.checkL("l",detCapture,this)){
+									if(boardControl.checkL("l",detCapture,this)){
 										tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOn
 										(tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].getPiece());
 										tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOff();
 										System.out.println("King still in check try again.");
 										lTurn = true;
 									}
-									else if(!board.checkL("l",detCapture,this)){
+									else if(!boardControl.checkL("l",detCapture,this)){
 										System.out.println( "Moved " + singleMatch.group(1) + singleMatch.group(2)+ " to " + singleMatch.group(3)  + singleMatch.group(4)); 
 										lTurn = false;
 									}
@@ -251,15 +253,15 @@ public class MoveController {
 									tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOn
 									(tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].getPiece());
 									tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOff();
-									board.updateBoard(tiles);
+									boardControl.updateBoard(tiles);
 
-									if(board.checkD("d",detCapture,this)){
+									if(boardControl.checkD("d",detCapture,this)){
 										tiles[convert.convertY(singleMatch.group(2))][convert.convertX(singleMatch.group(1))].setPieceOn
 										(tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].getPiece());
 										tiles[convert.convertY(singleMatch.group(4))][convert.convertX(singleMatch.group(3))].setPieceOff();
 										System.out.println("King still in check try again.");
 										lTurn = false;
-										board.updateBoard(tiles);
+										boardControl.updateBoard(tiles);
 									}
 									else{
 										System.out.println( "Moved " + singleMatch.group(1) + singleMatch.group(2)+ " to " + singleMatch.group(3) + singleMatch.group(4)); 
@@ -269,10 +271,10 @@ public class MoveController {
 							}
 
 							if(verbose){
-								board.updateBoard(tiles); 
+								boardControl.updateBoard(tiles); 
 							}
 							else{
-								board.nonVerboseUpdate(tiles);
+								boardControl.nonVerboseUpdate(tiles);
 							}
 						}
 					}
@@ -319,10 +321,10 @@ public class MoveController {
 					}
 
 					if(verbose){
-						board.updateBoard(tiles);
+						boardControl.updateBoard(tiles);
 					}
 					else{
-						board.nonVerboseUpdate(tiles);
+						boardControl.nonVerboseUpdate(tiles);
 					}
 				}
 
@@ -355,16 +357,16 @@ public class MoveController {
 						}
 
 						if(verbose){
-							board.updateBoard(tiles);
+							boardControl.updateBoard(tiles);
 						}
 						else{
-							board.nonVerboseUpdate(tiles);
+							boardControl.nonVerboseUpdate(tiles);
 						}
 					}
 				}
 			}
 			else{
-				board.updateBoard(tiles);
+				boardControl.updateBoard(tiles);
 			}
 		}
 	}

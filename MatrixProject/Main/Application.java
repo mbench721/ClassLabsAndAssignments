@@ -9,6 +9,7 @@ public class Application {
 	private ArrayList<Matrix> sums = new ArrayList<Matrix>();
 	private ArrayList<Matrix> products = new ArrayList<Matrix>();
 	private ArrayList<Matrix> transposed = new ArrayList<Matrix>();
+	private ArrayList<Matrix> userMatrices = new ArrayList<Matrix>();
 
 	public Application(){
 		calc = true;
@@ -43,7 +44,7 @@ public class Application {
 			multChose();
 		}
 		else if(choice.equalsIgnoreCase("3")){
-
+			invChose();
 		}
 		else if(choice.equalsIgnoreCase("4")){
 			transChose();
@@ -92,6 +93,7 @@ public class Application {
 
 		}
 		Matrix first = new Matrix(userMatrix);
+		userMatrices.add(first);
 
 		System.out.println("Alright, How big of matrixes will we be adding? Keep in mind you can only add equal matrixes. enter in format rowsXcolumns");
 		startCapture = stan.nextLine();
@@ -129,6 +131,7 @@ public class Application {
 
 		}
 		Matrix second = new Matrix(userMatrix2);
+		userMatrices.add(second);
 		Matrix sum = new Matrix(first.addition(second.getMatrix()));
 		sums.add(sum);
 		System.out.println("your result was :");
@@ -155,7 +158,7 @@ public class Application {
 
 		for(int i = 0;i < size;++i){
 			userMatrix[start][i] = Double.parseDouble(tempS[i]);
-			System.out.println(userMatrix[start][i]);
+			
 
 		}
 		++start;
@@ -174,6 +177,7 @@ public class Application {
 
 		}
 		Matrix first = new Matrix(userMatrix);
+		userMatrices.add(first);
 		System.out.println("Alright, How big of matrix will we be Multiplying? enter in format rowsXcolumns");
 		startCapture = stan.nextLine();
 		double [][]userMatrix2 = new double[Integer.valueOf(startCapture.substring(0, startCapture.indexOf("x")))][Integer.valueOf(startCapture.substring(startCapture.indexOf("x") + 1))];
@@ -210,6 +214,7 @@ public class Application {
 
 		}
 		Matrix second = new Matrix(userMatrix2);
+		userMatrices.add(second);
 		Matrix prod = new Matrix(first.multiplication(second.getMatrix()));
 		products.add(prod);
 		for(int i = 0; i < prod.getMatrix().length; ++ i){
@@ -235,7 +240,7 @@ public class Application {
 
 		for(int i = 0;i < size;++i){
 			userMatrix[start][i] = Double.parseDouble(tempS[i]);
-			System.out.println(userMatrix[start][i]);
+			
 
 		}
 		++start;
@@ -246,7 +251,7 @@ public class Application {
 				tempS = startCapture.split(",");
 				for(int i = 0;i < size ;++i){
 					userMatrix[start][i] = Double.parseDouble(tempS[i]);
-					System.out.println(userMatrix[start][i]);
+					
 
 				}
 				++start;
@@ -254,11 +259,56 @@ public class Application {
 
 		}
 		Matrix toTrans = new Matrix(userMatrix);
-		Matrix trans = new Matrix(toTrans.transpose(toTrans.getMatrix()));
-		transposed.add(trans);
-		for(int i = 0; i < trans.getMatrix().length; ++ i){
-			for(int j = 0; j < trans.getMatrix().length; ++ j){
-				System.out.print(trans.getMatrix()[i][j]);
+		userMatrices.add(toTrans);
+		Matrix transpose = new Matrix(new double[toTrans.getNumCols()][toTrans.getNumRows()]);
+		Matrix test = transpose.transpose(toTrans);
+		transposed.add(test);
+		for(int i = 0; i < test.getMatrix().length; ++ i){
+			for(int j = 0; j < test.getMatrix().length; ++ j){
+				System.out.print(test.getMatrix()[i][j]);
+			}
+		}
+	}
+	public void invChose(){
+		Scanner stan = new Scanner(System.in);
+		System.out.println("Alright, How big of matrix do you want to find the inverse of?");
+		String startCapture = stan.nextLine();
+		userMatrix = new double[Integer.valueOf(startCapture.substring(0, startCapture.indexOf("x")))][Integer.valueOf(startCapture.substring(startCapture.indexOf("x") + 1))];
+
+		System.out.println("Enter the matrix you would like to use, Press enter once when you are done entering rows");
+		System.out.println("and press enter twice to finalize the matrix.");
+		startCapture = stan.nextLine();
+
+		String[] tempS = startCapture.split(",");
+		int size = tempS.length;
+		int start = 0;
+
+		for(int i = 0;i < size;++i){
+			userMatrix[start][i] = Double.parseDouble(tempS[i]);
+			
+		}
+		++start;
+		
+		while(!startCapture.isEmpty()){
+			startCapture = stan.nextLine();
+			if(!startCapture.isEmpty()){
+				tempS = startCapture.split(",");
+			
+				for(int i = 0;i < size ;++i){
+					userMatrix[start][i] = Double.parseDouble(tempS[i]);
+					
+
+				}
+				++start;
+			}
+			
+		}
+		Matrix first = new Matrix(userMatrix);
+		Matrix inverse = new Matrix(userMatrix);
+				inverse.transpose(first);
+		for(int i = 0; i < inverse.getMatrix().length; ++ i){
+			for(int j = 0; j < inverse.getMatrix().length; ++ j){
+				System.out.print(inverse.getMatrix()[i][j]);
 			}
 		}
 	}

@@ -1,18 +1,26 @@
 package controllers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import utilities.PositionConverter;
 import gameobjects.*;
 
 public class BoardController {
 
+	private int boardSize = 8;
 	private Board board;
+	public Board getBoard() {
+		return board;
+	}
 	private PositionConverter convert;
+	private BoardTile[][] tiles;
 	private String [] whiteSetup = {"rla1","nla2","bla3","qla4","kla5","bla6","nla7","rla8","plb1","plb2","plb3","plb4","plb5","plb6","plb7","plb8"};
 	private String [] blackSetup = {"rdh1","ndh2","bdh3","qdh4","kdh5","bdh6","ndh7","rdh8","pdg1","pdg2","pdg3","pdg4","pdg5","pdg6","pdg7","pdg8"};
 	public BoardController(Board b){
 
 		this.board = b;
+		this.tiles = board.getTiles();
+		setSquares(tiles);
 		convert = new PositionConverter();
 
 	}		
@@ -136,7 +144,7 @@ public class BoardController {
 		}
 	}
 	public void placePieces(){
-		BoardTile[][] update = board.getTiles();
+	
 		
 		for(String black : blackSetup){
 			piecePlaceMent(black);
@@ -144,8 +152,100 @@ public class BoardController {
 		for(String white : whiteSetup){
 			piecePlaceMent(white);
 		}
-		board.updateBoard(update);
+		updateBoard(tiles);
 	}
+	public void nonVerboseUpdate(BoardTile[][] v){
+		tiles = v;
+	}
+	public BoardTile[][] setSquares(BoardTile[][] u) {
+
+		for(int i = 0; i < tiles.length; ++i){
+			
+			for(int j = 0; j < tiles.length; ++j){
+
+				tiles[i][j] = new BoardTile(i,j);
+				
+			}
+		}
+		
+		return tiles;
+	}
+
+	
+	public void generateBoard(){
+		int i = 1;
+		
+		System.out.print("   A  " + " B  " + " C  " + " D  " + " E  " + " F  " + " G  " + " H");
+		for (int row = 0; row < boardSize; row++)
+		{
+			System.out.println("");
+			System.out.println(" ---------------------------------");
+			System.out.print(i);
+			++i;
+			for (int column = 0; column < boardSize; column++)
+			{
+				System.out.print("| " +tiles[row][column].pieceType + " ");
+
+			}   
+			System.out.print("|");
+		}
+		System.out.println("");
+		System.out.println(" ---------------------------------");
+		
+	} 
+	public boolean checkL(String c,boolean cap,MoveController co){
+		boolean test = false;
+		for(int i = 0; i < tiles.length; ++i){
+
+			for(int j = 0; j < tiles.length; ++j){
+				if(tiles[i][j].isOccupied()){
+
+					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].getPiece().getColor().equalsIgnoreCase("l")){
+						test = tiles[i][j].detLcheck(tiles,cap,co);
+					}
+				}
+			}
+		}
+		return test;
+	}
+	public boolean checkD(String c,boolean cap,MoveController co){
+		boolean test = false;
+		for(int i = 0; i < tiles.length; ++i){
+
+			for(int j = 0; j < tiles.length; ++j){
+				if(tiles[i][j].isOccupied()){
+
+					if(tiles[i][j].pieceType.equalsIgnoreCase("k") && tiles[i][j].getPiece().getColor().equalsIgnoreCase("d")){
+						test = tiles[i][j].detDcheck(tiles,cap,co);
+						
+					}
+				}
+			}
+		}
+		return test;
+
+	}
+	public void updateBoard(BoardTile[][] u){
+		tiles = u;
+		int i = 1;
+		System.out.print("   A  " + " B  " + " C  " + " D  " + " E  " + " F  " + " G  " + " H");
+		for (int row = 0; row < boardSize; row++)
+		{
+			System.out.println("");
+			System.out.println(" ---------------------------------");
+			System.out.print(i);
+			++i;
+			for (int column = 0; column < boardSize; column++)
+			{
+				System.out.print("| " +tiles[row][column].pieceType + " ");
+
+			}   
+			System.out.print("|");
+		}
+		System.out.println("");
+		System.out.println(" ---------------------------------");
+	} 
+	
 
 }
 
