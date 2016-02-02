@@ -6,26 +6,21 @@ import gameobjects.Rook;
 import java.util.ArrayList;
 
 
-
-
-
-
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
-<<<<<<< HEAD
-=======
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -39,6 +34,7 @@ import javafx.scene.Group;
 public class ChessBoard extends Application {
 	Pane boardLayer;
 	Pane pieceLayer;
+	BorderPane borderLayer;
 	Image whiteImage;
 	Image blackImage;
 	private ArrayList<BoardTile>nodes = new ArrayList<BoardTile>();
@@ -47,14 +43,12 @@ public class ChessBoard extends Application {
 	public void start(Stage primaryStage) {
 		GridPane root = new GridPane();
 		//Group piece = new Group();
-<<<<<<< HEAD
-		  pieceLayer = new Pane();
-		  boardLayer = new Pane();
-=======
+
+	    pieceLayer = new Pane();
+		boardLayer = new Pane();
 		pieceLayer = new Pane();
 		boardLayer = new Pane();
 		borderLayer = new BorderPane();
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
 		final int size = 8 ;
 		Image bRook = new Image(getClass().getResource("bRook.png").toExternalForm());
 		for (int row = 0; row < size; row++) {
@@ -78,13 +72,9 @@ public class ChessBoard extends Application {
 				square.setStyle("-fx-background-color: "+color+";");
 
 				root.add(square, col, row);
-<<<<<<< HEAD
-				
-				
-=======
 				System.out.println(col + " " + row);
 
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
+
 			}
 		}
 		for (int i = 0; i < size; i++) {
@@ -93,37 +83,28 @@ public class ChessBoard extends Application {
 		}
 		createPlayers();
 		for (BoardTile block : nodes) {
-<<<<<<< HEAD
 			
-				setDragListeners(block);
+				setDragListeners(block,black.get(0));
 			
 			
 		}
 		setMoveListeners(black.get(0));
 		
 		primaryStage.setScene(new Scene(root, 1000, 750));
-=======
-
-			setDragListeners(block,black.get(0));
-
-
-		}
-
 		borderLayer.setCenter(root);
 		borderLayer.setTop(makeMenu());
 		primaryStage.setScene(new Scene(borderLayer, 1000, 750));
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
+
 		primaryStage.show();
 
 		//	root.getChildren().add(boardLayer);
 
 
 	}
-<<<<<<< HEAD
 	 class Delta { double x, y; }
-	public void setDragListeners(final BoardTile block) {
+	
 		
-=======
+
 
 	private MenuBar makeMenu()
 	{
@@ -171,24 +152,25 @@ public class ChessBoard extends Application {
 		menuBar.getMenus().addAll(menuFile, menuHelp);
 		return menuBar;
 	}
+	
 
 
-	class Delta { double x, y; }
+	
 	public void setDragListeners(final BoardTile block,final Piece piece) {
 		final Delta dragDelta = new Delta();
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
+
 
 		block.setOnMousePressed(new EventHandler<MouseEvent>() {
 
 			@Override public void handle(MouseEvent mouseEvent) {
-<<<<<<< HEAD
+
 				
 	            
-=======
+
 				dragDelta.x = piece.getLayoutX() - mouseEvent.getSceneX();
 				dragDelta.y = piece.getLayoutY() - mouseEvent.getSceneY();
 				System.out.println(piece.getLayoutX());
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
+
 				block.setStyle("-fx-background-color:red;");
 				
 
@@ -207,7 +189,7 @@ public class ChessBoard extends Application {
 				else if(block.color.equalsIgnoreCase("b")){
 					block.setStyle("-fx-background-color:black;");
 				}
-<<<<<<< HEAD
+
 				
 				
 				
@@ -227,10 +209,9 @@ public class ChessBoard extends Application {
 				
 				piece.setCursor(Cursor.CLOSED_HAND);
 
-=======
 
 				piece.reLocate(nodes.get(1));	
->>>>>>> cc1c6949049dd90ededbc2653d4e209fd29adde9
+
 
 			}
 		});
